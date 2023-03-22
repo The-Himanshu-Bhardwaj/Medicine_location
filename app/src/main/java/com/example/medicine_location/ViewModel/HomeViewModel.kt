@@ -30,7 +30,6 @@ class HomeViewModel : ViewModel() {
 //            put("drawer", "1")
 //            put("partition", "1")
 //        }
-//
 //        reference.push().setValue(data)
 
         viewModelScope.launch(Dispatchers.IO) {   getMedicineList() }
