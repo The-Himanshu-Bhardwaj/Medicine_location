@@ -1,6 +1,7 @@
 package com.example.medicine_location.ViewModel
 
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -60,7 +61,7 @@ class HomeViewModel : ViewModel() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                // snackbar to be shown here
+               // show snackbar here
             }
         })
     }
