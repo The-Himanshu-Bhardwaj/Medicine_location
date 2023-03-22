@@ -154,7 +154,7 @@ class NewMedActivity : AppCompatActivity() {
 
         val snackbar = Snackbar.make(snackView, message, Snackbar.LENGTH_SHORT)
         val snackbarView = snackbar.view
-        snackbar.setDuration(800)
+        snackbar.duration = 800
         val params = snackbar.view.layoutParams as FrameLayout.LayoutParams
         params.gravity = Gravity.TOP
         snackbar.view.layoutParams = params
