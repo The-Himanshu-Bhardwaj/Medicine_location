@@ -4,7 +4,8 @@ data class MedicineModel (
     var name : String?,
     var row : String?,
     var drawer : String?,
-    var partition : String?
+    var partition : String?,
+    var firebaseKey : String?
 ) {
-    constructor() : this(null, null, null, null)
+    constructor() : this(null, null, null, null, null)
 }

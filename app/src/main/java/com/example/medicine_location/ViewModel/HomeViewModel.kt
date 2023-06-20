@@ -1,7 +1,6 @@
 package com.example.medicine_location.ViewModel
 
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -15,24 +14,27 @@ class HomeViewModel : ViewModel() {
 
     private var database: FirebaseDatabase
     private var reference: DatabaseReference
-    private var _medcineLiveList = MutableLiveData<ArrayList<MedicineModel>>()
+    private var _medicineLiveList = MutableLiveData<ArrayList<MedicineModel>>()
     private var _listOfData = ArrayList<MedicineModel>()
-    val finalMedicineList get() = _medcineLiveList
+    val finalMedicineList get() = _medicineLiveList
+
 
     init {
         database = FirebaseUtil.getFirebaseDatabaseInstance()
         reference = database.getReference("alldata")
         reference.keepSynced(true)
-//        val data = HashMap<String, String>()
-//        data.apply {
-//            put("name", "CETRIZINE")
-//            put("row", "SECOND")
-//            put("drawer", "1")
-//            put("partition", "1")
-//        }
-//        reference.push().setValue(data)
+        val data = HashMap<String, String>()
+        data.apply {
+            put("name", "himanshu")
+            put("row", "SECOND")
+            put("drawer", "1")
+            put("partition", "1")
+        }
+        reference.push().setValue(data)
 
-        viewModelScope.launch(Dispatchers.IO) {   getMedicineList() }
+        viewModelScope.launch(Dispatchers.IO) {
+            getMedicineList()
+        }
 
     }
 
@@ -50,9 +52,11 @@ class HomeViewModel : ViewModel() {
                     medicineModel.drawer = singleMed["drawer"].toString()
                     medicineModel.row = singleMed["row"].toString()
                     medicineModel.partition = singleMed["partition"].toString()
+                    Log.d("@@", "keyyyyyy: ${medData.key}")
+                    medicineModel.firebaseKey = medData.key
 
                     _listOfData.add(medicineModel)
-                    _medcineLiveList.postValue(_listOfData)
+                    _medicineLiveList.postValue(_listOfData)
                     Log.d("@@", "list - >>> ${_listOfData.size}")
                 }
 
