@@ -17,7 +17,7 @@ class MedicineAdapter(private val list: ArrayList<MedicineModel>) : RecyclerView
 
     private lateinit var database: FirebaseDatabase
     private lateinit var reference: DatabaseReference
-    var firebaseKey : String = ""
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         database = FirebaseUtil.getFirebaseDatabaseInstance()
         val binding = MedicineLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -39,20 +39,20 @@ class MedicineAdapter(private val list: ArrayList<MedicineModel>) : RecyclerView
         holder.binding.partitionLabel.append(data.partition)
         holder.binding.drawerLabel.append(data.drawer)
 
-        holder.itemView.setOnClickListener {
-            Log.d("@@", "onBindViewHolder: $position")
-            val data = HashMap<String, String>()
-            data.apply {
-                put("drawer", "ajsdgajdfkjajhks")
-                put("name", list[position].name!!)
-                put("partition", list[position].partition!!)
-                put("row", list[position].row!!)
-            }
-            reference = database.getReference("alldata").child(list[position].firebaseKey!!)
-            reference.setValue(data)
-
-
-        }
+//        holder.itemView.setOnClickListener {
+//            Log.d("@@", "onBindViewHolder: $position")
+//            val data = HashMap<String, String>()
+//            data.apply {
+//                put("drawer", "77")
+//                put("name", list[position].name!!)
+//                put("partition", list[position].partition!!)
+//                put("row", list[position].row!!)
+//            }
+//            reference = database.getReference("alldata").child(list[position].firebaseKey!!)
+//            reference.setValue(data)
+//
+//
+//        }
     }
 
     class MyViewHolder(val binding: MedicineLayoutBinding) : RecyclerView.ViewHolder(binding.root)

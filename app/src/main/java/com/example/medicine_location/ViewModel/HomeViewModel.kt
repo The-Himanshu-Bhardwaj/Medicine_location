@@ -23,14 +23,15 @@ class HomeViewModel : ViewModel() {
         database = FirebaseUtil.getFirebaseDatabaseInstance()
         reference = database.getReference("alldata")
         reference.keepSynced(true)
-        val data = HashMap<String, String>()
-        data.apply {
-            put("name", "himanshu")
-            put("row", "SECOND")
-            put("drawer", "1")
-            put("partition", "1")
-        }
-        reference.push().setValue(data)
+
+//        val data = HashMap<String, String>()
+//        data.apply {
+//            put("name", "himanshu")
+//            put("row", "SECOND")
+//            put("drawer", "1")
+//            put("partition", "1")
+//        }
+//        reference.push().setValue(data)
 
         viewModelScope.launch(Dispatchers.IO) {
             getMedicineList()
@@ -52,7 +53,6 @@ class HomeViewModel : ViewModel() {
                     medicineModel.drawer = singleMed["drawer"].toString()
                     medicineModel.row = singleMed["row"].toString()
                     medicineModel.partition = singleMed["partition"].toString()
-                    Log.d("@@", "keyyyyyy: ${medData.key}")
                     medicineModel.firebaseKey = medData.key
 
                     _listOfData.add(medicineModel)
@@ -60,7 +60,6 @@ class HomeViewModel : ViewModel() {
                     Log.d("@@", "list - >>> ${_listOfData.size}")
                 }
 
-//                Log.d("@@", _listOfData.toString())
             }
 
             override fun onCancelled(error: DatabaseError) {
